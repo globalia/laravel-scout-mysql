@@ -163,11 +163,14 @@ class Indexer
 
         foreach ($newSchemaInfo as $field => $config) {
             if (! is_array($config)) {
-                $config = [$config];
+                $config = ['type' => $config];
+            } elseif (! isset($config['type'])) {
+                $config = array_merge(['type' => $config[0]], $config);
+                unset($config[0]);
+            }
 
-                if (in_array($config['type'], ['string', 'text'], true)) {
-                    $config['boostable'] = false;
-                }
+            if (in_array($config['type'], ['string', 'text'], true) && ! isset($config['boostable'])) {
+                $config['boostable'] = false;
             }
 
             if (! isset($oldSchemaInfo[$field]) || $oldSchemaInfo[$field] !== $config) {
@@ -255,8 +258,11 @@ class Indexer
             $this->alterSchema($diffSchema);
         }
 
+        $flippedReservedFields = array_flip($this->reservedFields);
+
         foreach ($models as $model) {
-            $model->searchIndex()->updateOrCreate([], $model->toSearchableArray());
+            $searchableArray = array_diff_key($model->toSearchableArray(), $flippedReservedFields);
+            $model->searchIndex()->updateOrCreate([], $searchableArray);
         }
     }
 
