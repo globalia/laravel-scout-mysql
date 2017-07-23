@@ -20,7 +20,7 @@ class ScoutMysqlServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
-            __DIR__.'/config/scout_mysql.php' => config_path('scout_mysql.php'),
+            __DIR__.'/../../../config/scout_mysql.php' => config_path('scout_mysql.php'),
         ]);
 
         SearchIndex::unguard();
@@ -37,7 +37,7 @@ class ScoutMysqlServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/default.php', 'scout_mysql');
+        $this->mergeConfigFrom(__DIR__.'/../../../config/default.php', 'scout_mysql');
 
         $this->app->singleton(Search::class);
     }
