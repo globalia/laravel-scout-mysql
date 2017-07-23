@@ -46,7 +46,7 @@ After you've published the Laravel Scout package configuration:
 
 Instead of using the "Laravel\Scout\Searchable" trait, use this "Globalia\LaravelScoutMysql\Models\Concerns\HasSearchIndex"
 
-Now you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
+otherwise you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
 
 ## Credits
 
