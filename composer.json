@@ -1,8 +1,14 @@
 {
+    "name": "globalia/laravel-scout-mysql",
+    "description": "MySql Driver for Laravel Scout",
+    "keywords": ["laravel", "scout", "mysql"],
     "require": {
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "laravel/scout": "^3.0"
     },
     "autoload": {
-        "psr-4": {"": "src/"}
+        "psr-4": {
+            "Globalia\\LaravelScoutMysql\\": "src/Globalia/LaravelScoutMysql/"
+        }
     }
 }

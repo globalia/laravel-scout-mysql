@@ -3,7 +3,8 @@
 namespace Globalia\LaravelScoutMysql\Engines;
 
 use Globalia\LaravelScoutMysql\Models\SearchExpression;
-use Globalia\LaravelScoutMysql\Services\Search;
+use Globalia\LaravelScoutMysql\Services\Indexer;
+use Globalia\LaravelScoutMysql\Services\Searcher;
 use Illuminate\Database\Eloquent\Collection;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
@@ -11,20 +12,29 @@ use Laravel\Scout\Engines\Engine;
 class MysqlEngine extends Engine
 {
     /**
-     * The Mysql Search Service.
+     * The Indexer Service.
      *
-     * @var Search
+     * @var Indexer
      */
-    private $search;
+    private $indexer;
+
+    /**
+     * The Searcher Service.
+     *
+     * @var Indexer
+     */
+    private $searcher;
 
     /**
      * Create a new engine instance.
      *
-     * @param  Search  $search
+     * @param  Indexer  $indexer
      */
-    public function __construct(Search $search)
+    public function __construct(Indexer $indexer, Searcher $searcher)
     {
-        $this->search = $search;
+        $this->indexer = $indexer;
+
+        $this->searcher = $searcher;
     }
 
     /**
@@ -34,7 +44,7 @@ class MysqlEngine extends Engine
      */
     public function update($models)
     {
-        $this->search->indexModels($models);
+        $this->indexer->indexModels($models);
     }
 
     /**
@@ -44,7 +54,7 @@ class MysqlEngine extends Engine
      */
     public function delete($models)
     {
-        $this->search->deleteModels($models);
+        $this->indexer->deleteModels($models);
     }
 
     /**
@@ -97,13 +107,13 @@ class MysqlEngine extends Engine
         if ($builder->callback) {
             return call_user_func(
                 $builder->callback,
-                $this->search,
+                $this->searcher,
                 $builder->query,
                 $options
             );
         }
 
-        return $this->search->search($builder->query, $options);
+        return $this->searcher->search($builder->query, $options);
     }
 
     /**
