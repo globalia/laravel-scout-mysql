@@ -120,12 +120,12 @@ class SearchExpression
         } elseif (substr($normalizedGrammar, -12) === ' like binary') {
             $expression = rtrim(substr($grammar, 0, -12));
             $operator = 'like binary';
-        } elseif (substr($normalizedGrammar, -13) === ' not beetween') {
+        } elseif (substr($normalizedGrammar, -13) === ' not between') {
             $expression = rtrim(substr($grammar, 0, -13));
-            $operator = 'not beetween';
-        } elseif (substr($normalizedGrammar, -9) === ' beetween') {
+            $operator = 'not between';
+        } elseif (substr($normalizedGrammar, -9) === ' between') {
             $expression = rtrim(substr($grammar, 0, -9));
-            $operator = 'beetween';
+            $operator = 'between';
         } elseif (substr($normalizedGrammar, -11) === ' not regexp') {
             $expression = rtrim(substr($grammar, 0, -11));
             $operator = 'not regexp';
