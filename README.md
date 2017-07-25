@@ -1,6 +1,6 @@
 # Laravel Scout MySQL Driver
 
-This package makes is the [MySQL](https://www.mysql.com/) driver for Laravel Scout.
+This package is a [MySQL](https://www.mysql.com/) driver for Laravel Scout.
 
 ## Contents
 
