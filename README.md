@@ -44,13 +44,7 @@ After you've published the Laravel Scout package configuration:
 
 ## Usage
 
-Instead of using the "Laravel\Scout\Searchable" trait, use this "Globalia\LaravelScoutMysql\Models\Concerns\HasSearchIndex"
-
-otherwise you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
-
-# Sample
-
-Here is an example of how to use the engine.
+Here is an example of how to use the engine:
 
 ```php
     $result = Todo::search($term)
@@ -60,6 +54,10 @@ Here is an example of how to use the engine.
 
     return null === $limit ? $result->get() : $result->paginate($limit);
 ```
+
+Instead of using the "Laravel\Scout\Searchable" trait, use this "Globalia\LaravelScoutMysql\Models\Concerns\HasSearchIndex"
+
+otherwise you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
 
 ## Credits
 
