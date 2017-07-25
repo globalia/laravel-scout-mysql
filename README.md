@@ -48,6 +48,19 @@ Instead of using the "Laravel\Scout\Searchable" trait, use this "Globalia\Larave
 
 otherwise you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
 
+# Sample
+
+Here is an example of how to use the engine.
+
+```php
+    $result = Todo::search($term)
+        ->where('boost(name)', 5)
+        ->where('boost(tags)', 2)
+        ->where('checked', 1);
+
+    return null === $limit ? $result->get() : $result->paginate($limit);
+```
+
 ## Credits
 
 - [Globalia](https://github.com/globalia)
