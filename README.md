@@ -50,7 +50,8 @@ Here is an example of how to use the engine:
     $result = Todo::search($term)
         ->where('boost(name)', 5)
         ->where('boost(tags)', 2)
-        ->where('checked', 1);
+        ->where('checked', 1)
+        ->where('published_at >=', \Carbon::now());
 
     return null === $limit ? $result->get() : $result->paginate($limit);
 ```
@@ -58,6 +59,15 @@ Here is an example of how to use the engine:
 Instead of using the "Laravel\Scout\Searchable" trait, use this "Globalia\LaravelScoutMysql\Models\Concerns\HasSearchIndex"
 
 otherwise you can use Laravel Scout as described in the [official documentation](https://laravel.com/docs/5.4/scout)
+
+### Searching in all models
+
+Since the index table is a model, you can search in it directly. Each result will be hydrated to its corresponding model.
+
+```php
+    $result = SearchIndex::search($term);
+```
+
 
 ## Credits
 
